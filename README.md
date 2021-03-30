@@ -33,7 +33,7 @@ Code for the Book: https://github.com/IntelliTect/EssentialCSharp
 
 Though most of the course work will be cross platform, we will be working on Windows inside of Visual Studio.
 
-### Recommended ###
+### Recommmmmmmmended ###
 - [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/). Version 16.8 or later. The community edition is fine, though we believe most students should have access to higher SKUs with EWU's MSDN (this assumption may be wrong). Lab computers should have Professional already installed.
 - [Visual Studio Code](https://code.visualstudio.com/) This lightweight editor has several plugins that can make web development much easier. Many of us also use it as our catch-all lightweight text/code editor.
 - [Git Kraken](https://www.gitkraken.com/) Though you can do all of the git interaction from within Visual Studio/Visual Studio Code, or on the command line, GitKraken is free for open source work. It also provides a nice graphical version of the commit history so you can see how various commits and branches relate.
