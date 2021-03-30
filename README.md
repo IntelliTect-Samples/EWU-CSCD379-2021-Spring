@@ -31,7 +31,7 @@ Code for the Book: https://github.com/IntelliTect/EssentialCSharp
 ### Required ###
 - [.NET 5.0](https://dotnet.microsoft.com/download)
 
-Though most of the course work will be cross platform, we will be working on Windows inside of Visual Studio. For the UI portion of the class Visual Studio on Windows will be required. 
+Though most of the course work will be cross platform, we will be working on Windows inside of Visual Studio.
 
 ### Recommended ###
 - [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/). Version 16.8 or later. The community edition is fine, though we believe most students should have access to higher SKUs with EWU's MSDN (this assumption may be wrong). Lab computers should have Professional already installed.
