@@ -1,4 +1,4 @@
-Please feel free to submit updates.
+**Please feel free to submit updates.**
 
 ## Instructors ##
 [Mark Michaelis](https://github.com/MarkMichaelis), [Kevin Bost](https://github.com/Keboo), and [Michael Stokesbary](https://github.com/breaman)
@@ -8,7 +8,7 @@ For any general question we suggest asking in Teams so that others can help as w
 You can also send an e-mail to: EWU-Instructors@IntelliTect.com
 
 ## Online Meeting
-We will be utilizing Microsoft Teams for this class. The link to the meeting will be in the course syllabus on Canvas. You can find additional information for accessing Teams [here](Docs/MicrosoftTeams.md)
+**We will be utilizing Microsoft Teams for this class. The link to the meeting will be in the course syllabus on Canvas. You can find additional information for accessing Teams [here](Docs/MicrosoftTeams.md)**
 
 ## GitHub Information
 In order to properly grade assignments, we need to be able to link your GitHub ID with your name in Canvas. Within Teams there is a Files tab, that contains a GitHubUserNames.xlsx spreadsheet. Please add you GitHub ID and name to this spread sheet so we can properly assign grades. 
@@ -48,4 +48,4 @@ We will try to record class presentations so that students can review after clas
 
 Please note:
 * **Do not expect or rely on video recordings.**  We are not making any commitment to having video recordings of class. 
-* Please keep all videos ***confidential***. These videos are for people enrolled in this class.  No videos or parts of videos should be distributed or shared with those outside of the class.
+* ***Please keep all videos confidential***. These videos are for people enrolled in this class.  No videos or parts of videos should be distributed or shared with those outside of the class.
