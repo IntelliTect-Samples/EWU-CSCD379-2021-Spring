@@ -1,0 +1,7 @@
+@model EventViewModel
+
+<form asp-controller="Events" asp-action="Create" method="post">
+    @await Html.PartialAsync("_CreateOrEdit")
+    <button>Create</button>
+    <a asp-controller="Events" asp-action="Index">Cancel</a>
+</form>

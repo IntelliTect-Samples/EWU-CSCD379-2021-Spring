@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace SecretSanta.Web
+namespace UserGroup.Web
 {
     public class Program
     {

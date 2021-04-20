@@ -1,0 +1,27 @@
+@model List<UserViewModel>
+
+@{int counter = 0;}
+
+<section class="grid grid-cols-3">
+    @foreach(var user in Model) {
+        <section class="border-gray-500 border-2 p-6 m-5 rounded-lg">
+            @user.FirstName @user.LastName <a asp-controller="Users" asp-action="Edit" asp-route-id=@counter>Edit</a>
+            <form asp-controller="Users" asp-action="Delete" asp-route-id=@counter method="post"><button>X</button></form>
+            @{counter++;}
+        </section>
+    }
+</section>
+
+@* <section class="flex flex-wrap">
+    @foreach(var user in Model) {
+        <div class="w-1/3">
+            <section class="border-gray-500 border-2 p-6 m-5 rounded-lg">
+                @user.FirstName @user.LastName <a asp-controller="Users" asp-action="Edit" asp-route-id=@counter>Edit</a>
+                <form asp-controller="Users" asp-action="Delete" asp-route-id=@counter method="post"><button>X</button></form>
+                @{counter++;}
+            </section>
+        </div>
+    }
+</section> *@
+
+<a asp-controller="Users" asp-action="Create">Create</a>

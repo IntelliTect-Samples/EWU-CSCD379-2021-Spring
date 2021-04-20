@@ -1,0 +1,43 @@
+{
+  "name": "usergroup.web",
+  "version": "1.0.0",
+  "scripts": {
+    "build:dev": "webpack --mode development --watch",
+    "build:prod": "export NODE_ENV=production && webpack --mode production"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tailwindcss": "2.1.1"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "1.2.35",
+    "@fortawesome/free-solid-svg-icons": "5.15.3",
+    "@fortawesome/free-regular-svg-icons": "5.15.3",
+    "@fortawesome/free-brands-svg-icons": "5.15.2",
+    "autoprefixer": "10.2.5",
+    "clean-webpack-plugin": "3.0.0",
+    "copy-webpack-plugin": "8.1.1",
+    "css-loader": "5.2.1",
+    "expose-loader": "2.0.0",
+    "fibers": "5.0.0",
+    "html-webpack-plugin": "5.3.1",
+    "mini-css-extract-plugin": "1.4.1",
+    "postcss": "8.2.10",
+    "postcss-loader": "5.2.0",
+    "sass": "1.32.8",
+    "style-loader": "2.0.0",
+    "stylelint": "13.12.0",
+    "stylelint-config-recommended": "4.0.0",
+    "stylelint-config-standard": "21.0.0",
+    "stylelint-declaration-block-no-ignored-properties": "2.3.0",
+    "stylelint-order": "4.1.0",
+    "stylelint-scss": "3.19.0",
+    "ts-loader": "8.1.0",
+    "typescript": "4.2.4",
+    "webpack": "5.32.0",
+    "webpack-cli": "4.6.0"
+  },
+  "main": "postcss.config.js",
+  "description": ""
+}

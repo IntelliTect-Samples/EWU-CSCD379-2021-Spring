@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace SecretSanta.Api
+namespace UserGroup.Api
 {
     public class Startup
     {
@@ -32,7 +32,7 @@ namespace SecretSanta.Api
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello from API!");
+                    await context.Response.WriteAsync("Hello from Api!");
                 });
             });
         }

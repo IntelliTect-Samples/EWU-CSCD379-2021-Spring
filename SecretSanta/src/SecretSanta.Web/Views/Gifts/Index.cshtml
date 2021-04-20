@@ -1,0 +1,11 @@
+@model List<GiftViewModel>
+
+@{int counter = 0;}
+
+@foreach(var giftViewModel in Model) {
+    <section>
+        @giftViewModel.Title - @giftViewModel.Description <a asp-controller="Gifts" asp-action="Edit" asp-route-id=@counter>Edit</a><form asp-action="Delete" asp-route-id=@counter method="post"><button>X</button></form>
+        @{counter++;}
+    </section>
+}
+<a asp-controller="Gifts" asp-action="Create">Create</a>

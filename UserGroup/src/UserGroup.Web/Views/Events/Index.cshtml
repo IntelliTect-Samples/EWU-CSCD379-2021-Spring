@@ -1,0 +1,11 @@
+@model List<EventViewModel>
+
+@{int counter = 0;}
+
+@foreach(var eventViewModel in Model) {
+    <section>
+        @eventViewModel.Title - @eventViewModel.Date <a asp-controller="Events" asp-action="Edit" asp-route-id=@counter>Edit</a><form asp-action="Delete" asp-route-id=@counter method="post"><button>X</button></form>
+        @{counter++;}
+    </section>
+}
+<a asp-controller="Events" asp-action="Create">Create</a>

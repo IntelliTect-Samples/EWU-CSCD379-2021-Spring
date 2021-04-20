@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserGroup - @ViewBag.Title</title>
+    <!-- Stylesheets -->
+    <% for (var filename in htmlWebpackPlugin.files.css) { %>
+    <link href="~<%= htmlWebpackPlugin.files.css[filename] %>" rel="stylesheet" />
+    <% } %>
+    <!-- End Stylesheets -->
+</head>
+<body>
+    <header class="bg-green-500 text-white flex flex-col sm:flex-row justify-between p-6">
+        <div class="flex flex-row justify-between">
+            <a class="text-2xl leading-10" asp-controller="Home" asp-action="Index">User Group</a>
+            <button class="sm:hidden"><i class="fas fa-bars text-2xl align-middle h-full"></i></button>
+        </div>
+        <nav class="hidden sm:inline-block">
+            <ul class="flex flex-col sm:flex-row">
+                <li class="sm:px-6 leading-10"><a asp-controller="Speakers" asp-action="Index">Speakers</a></li>
+                <li class="sm:px-6 leading-10"><a asp-controller="Events" asp-action="Index">Events</a></li>
+            </ul>
+        </nav>
+    </header>
+    @RenderBody()
+
+    <!-- Scripts -->
+    <% for (var index in htmlWebpackPlugin.files.js) { %>
+    <script src="~<%= htmlWebpackPlugin.files.js[index] %>"></script>
+    <% } %>
+    <!-- End Scripts -->
+</body>
+</html>

@@ -1,0 +1,7 @@
+@model GiftViewModel
+
+<form asp-controller="Gifts" asp-action="Create" method="post">
+    @await Html.PartialAsync("_CreateOrEdit")
+    <button>Create</button>
+    <a asp-controller="Gifts" asp-action="Index">Cancel</a>
+</form>
