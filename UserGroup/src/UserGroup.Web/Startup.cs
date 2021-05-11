@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UserGroup.Web.Api;
@@ -13,10 +14,16 @@ namespace UserGroup.Web
 {
     public class Startup
     {
-        public static System.Net.Http.HttpClient ApiClient = new()
+        private IConfiguration Configuration { get; }
+        public System.Net.Http.HttpClient ApiClient { get; }
+        public Startup(IConfiguration configuration)
         {
-            BaseAddress = new Uri("https://localhost:5101")
-        };
+            Configuration = configuration;
+            ApiClient = new()
+            {
+                BaseAddress = new Uri(Configuration["ApiHost"])
+            };
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
