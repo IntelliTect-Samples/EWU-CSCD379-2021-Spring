@@ -23,6 +23,16 @@ namespace UserGroup.Api
             services.AddControllers();
 
             services.AddSwaggerDocument();
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +47,8 @@ namespace UserGroup.Api
 
             app.UseOpenApi();
             app.UseSwaggerUi3();
+
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {

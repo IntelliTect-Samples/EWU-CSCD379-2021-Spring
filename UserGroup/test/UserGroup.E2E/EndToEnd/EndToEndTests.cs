@@ -143,5 +143,41 @@ namespace UserGroup.Web.Tests
 
             await page.ScreenshotAsync("events.png");
         }
+
+        [TestMethod]
+        public async Task CreateEvent()
+        {
+            var localhost = Server.WebRootUri.AbsoluteUri.Replace("127.0.0.1", "localhost");
+            using var playwright = await Playwright.CreateAsync();
+            await using var browser = await playwright.Chromium.LaunchAsync(new LaunchOptions
+            {
+                Headless = true
+            });
+
+            var page = await browser.NewPageAsync();
+            var response = await page.GoToAsync(localhost);
+
+            Assert.IsTrue(response.Ok);
+
+            await page.ClickAsync("text=Events");
+
+            await page.WaitForSelectorAsync("body > section > section > section");
+            var events = await page.QuerySelectorAllAsync("body > section > section > section");
+            Assert.AreEqual(3, events.Count());
+
+            await page.ClickAsync("text=Create");
+
+            await page.TypeAsync("input#Title", "Test Event");
+            await page.TypeAsync("input#Description", "Just a quick event created by Playwright");
+            await page.TypeAsync("input#Date", "5/13/2021 6 PM");
+            await page.TypeAsync("input#Location", "Online Teams");
+            // await page.SelectOptionAsync("select#SpeakerId", "2");
+
+            await page.ClickAsync("text=Create");
+
+            await page.WaitForSelectorAsync("body > section > section > section");
+            events = await page.QuerySelectorAllAsync("body > section > section > section");
+            Assert.AreEqual(4, events.Count());
+        }
     }
 }

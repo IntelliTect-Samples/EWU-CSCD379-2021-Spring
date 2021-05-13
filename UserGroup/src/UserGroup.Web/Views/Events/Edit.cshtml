@@ -1,7 +1,5 @@
-@model Event
-
-<form asp-controller="Events" asp-action="Edit" method="post">
+<section x-data="UserGroup.createOrUpdateEvent()" x-init="loadData()">
     @await Html.PartialAsync("_CreateOrEdit")
-    <button class="btn mr-6">Update</button>
-    <a class="btn bg-red-400 inline-block"asp-controller="Events" asp-action="Index">Cancel</a>
-</form>
+    <button class="border-2 bg-indigo-400 border-indigo-800 hover:bg-indigo-600 py-2 px-4 rounded-xl mr-3" @@click="update()">Update</button>
+    <a class="inline-block border-2 bg-white border-indigo-400 hover:border-indigo-600 py-2 px-4 rounded-xl" asp-controller="Events" asp-action="Index">Cancel</a>
+</section>

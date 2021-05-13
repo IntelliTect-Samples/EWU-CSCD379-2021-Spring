@@ -17,22 +17,23 @@ namespace UserGroup.Web.Controllers
             Client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            ICollection<Event> events = await Client.GetAllAsync();
-            // List<EventViewModel> viewModelEvents = new();
-            // foreach(Event e in events)
-            // {
-            //     viewModelEvents.Add(new EventViewModel
-            //     {
-            //         Id = e.Id,
-            //         Title = e.Title,
-            //         Description = e.Description,
-            //         Date = e.Date?.DateTime,
-            //         Location = e.Location
-            //     });
-            // }
-            return View(events);
+            // ICollection<Event> events = await Client.GetAllAsync();
+            // // List<EventViewModel> viewModelEvents = new();
+            // // foreach(Event e in events)
+            // // {
+            // //     viewModelEvents.Add(new EventViewModel
+            // //     {
+            // //         Id = e.Id,
+            // //         Title = e.Title,
+            // //         Description = e.Description,
+            // //         Date = e.Date?.DateTime,
+            // //         Location = e.Location
+            // //     });
+            // // }
+            // return View(events);
+            return View();
         }
 
         public IActionResult Create()
@@ -40,46 +41,47 @@ namespace UserGroup.Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create(Event viewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                await Client.PostAsync(viewModel);
-                return RedirectToAction(nameof(Index));
-            }
+        // [HttpPost]
+        // public async Task<IActionResult> Create(Event viewModel)
+        // {
+        //     if (ModelState.IsValid)
+        //     {
+        //         await Client.PostAsync(viewModel);
+        //         return RedirectToAction(nameof(Index));
+        //     }
 
-            return View(viewModel);
+        //     return View(viewModel);
+        // }
+
+        public IActionResult Edit(int id)
+        {
+            // var myEvent = await Client.GetAsync(id);
+            // return View(myEvent);
+            return View();
         }
 
-        public async Task<IActionResult> Edit(int id)
-        {
-            var myEvent = await Client.GetAsync(id);
-            return View(myEvent);
-        }
+        // [HttpPost]
+        // public async Task<IActionResult> Edit(Event viewModel)
+        // {
+        //     if (ModelState.IsValid)
+        //     {
+        //         await Client.PutAsync(viewModel.Id, new UpdateEvent {Title = viewModel.Title, 
+        //             Description = viewModel.Description, 
+        //             Date = viewModel.Date, 
+        //             Location = viewModel.Location, 
+        //             SpeakerId = viewModel.SpeakerId
+        //         });
+        //         return RedirectToAction(nameof(Index));
+        //     }
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(Event viewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                await Client.PutAsync(viewModel.Id, new UpdateEvent {Title = viewModel.Title, 
-                    Description = viewModel.Description, 
-                    Date = viewModel.Date, 
-                    Location = viewModel.Location, 
-                    SpeakerId = viewModel.SpeakerId
-                });
-                return RedirectToAction(nameof(Index));
-            }
+        //     return View(viewModel);
+        // }
 
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await Client.DeleteAsync(id);
-            return RedirectToAction(nameof(Index));
-        }
+        // [HttpPost]
+        // public async Task<IActionResult> Delete(int id)
+        // {
+        //     await Client.DeleteAsync(id);
+        //     return RedirectToAction(nameof(Index));
+        // }
     }
 }
