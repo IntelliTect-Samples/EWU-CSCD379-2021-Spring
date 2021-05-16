@@ -38,7 +38,7 @@ export function setupUsers() {
         },
         async deleteUser(currentUser: User) {
             if (confirm(`Are you sure you want to delete ${currentUser.firstName} ${currentUser.lastName}?`)) {
-                var client = new UsersClient(`${apiHost}`);
+                var client = new UsersClient(apiHost);
                 await client.delete(currentUser.id);
                 await this.loadUsers();
             }
@@ -47,6 +47,40 @@ export function setupUsers() {
             try {
                 var client = new UsersClient(`${apiHost}`);
                 this.users = await client.getAll() || [];
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+}
+
+export function createOrUpdateUser() {
+    return {
+        user: {} as User,
+        async create() {
+            try {
+                const client = new UsersClient(apiHost);
+                await client.post(this.user);
+                window.location.href='/users';
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async update() {
+            try {
+                const client = new UsersClient(apiHost);
+                await client.put(this.user.id, this.user);
+                window.location.href='/users';
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async loadData() {
+            const pathnameSplit = window.location.pathname.split('/');
+            const id = pathnameSplit[pathnameSplit.length - 1];
+            try {
+                const client = new UsersClient(apiHost);
+                this.user = await client.get(+id);
             } catch (error) {
                 console.log(error);
             }
