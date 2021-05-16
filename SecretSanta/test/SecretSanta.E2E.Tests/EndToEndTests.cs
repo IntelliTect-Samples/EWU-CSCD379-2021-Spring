@@ -84,8 +84,6 @@ namespace SecretSanta.E2E.Tests
 
             await page.ClickAsync("text=Create");
 
-            await page.ScreenshotAsync("gifts.png");
-
             await page.TypeAsync("input#Title", "Simple Gift");
             await page.TypeAsync("input#Description", "Just a simple description");
             await page.TypeAsync("input#Url", "https://www.somegift.com");

@@ -16,16 +16,18 @@ namespace SecretSanta.Web.Controllers
             UserClient = userClient ?? throw new ArgumentNullException(nameof(userClient));
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var users = await UserClient.GetAllAsync();
-            var userViewModels = users.Select(x => new UserViewModel
-            {
-                Id = x.Id,
-                FirstName = x.FirstName,
-                LastName = x.LastName
-            }).ToList();
-            return View(userViewModels);
+            // var users = await UserClient.GetAllAsync();
+            // var userViewModels = users.Select(x => new UserViewModel
+            // {
+            //     Id = x.Id,
+            //     FirstName = x.FirstName,
+            //     LastName = x.LastName
+            // }).ToList();
+            // return View(userViewModels);
+
+            return View();
         }
 
         public IActionResult Create()
