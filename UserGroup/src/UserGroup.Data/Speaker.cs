@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace UserGroup.Data
 {
     public class Speaker
@@ -10,5 +12,7 @@ namespace UserGroup.Data
         {
             return $"{Id} {FirstName} {LastName}";
         }
+
+        List<Event> Events = new();
     }
 }

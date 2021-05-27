@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace UserGroup.Data
 {
@@ -10,6 +12,17 @@ namespace UserGroup.Data
         public string? Description { get; set; } = "";
         public DateTime? Date { get; set; }
         public string? Location { get; set; } = "";
-        public List<Speaker> Speakers { get; } = new();
+
+        [NotMapped]
+        public IEnumerable<Speaker> Speakers 
+        { 
+            get
+            {
+                return EventSpeaker.SelectMany(item => item.Speakers);
+            }
+        } 
+
+
+        public List<EventSpeaker> EventSpeaker = new();
     }
 }

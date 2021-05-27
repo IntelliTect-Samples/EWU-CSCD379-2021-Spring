@@ -19,5 +19,17 @@ namespace UserGroup.Data
         public DbSet<Event> Events => Set<Event>();
         public DbSet<Speaker> Speakers => Set<Speaker>();
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            if (modelBuilder is null)
+            {
+                throw new ArgumentNullException(nameof(modelBuilder));
+            }
+
+            //modelBuilder.Entity<Event>().HasAlternateKey(
+            //    item => new { item.Date, item.Location }
+            //); //.HasName($"{nameof(Event)}.AlternateKey");
+            modelBuilder.Entity<Event>().HasIndex(item => new { item.Date, item.Location }).IsUnique();
+        }
     }
 }
