@@ -1,7 +1,16 @@
 @model GroupViewModel
 
-<div>
-    <label asp-for="Name"></label>
-    <input type="text" asp-for="Name" />
-    <span asp-validation-for="Name"></span>
+<section class="mb-6">
+<div asp-validation-summary='All'>
+    <div class="flex mb-6 mt-3">
+        <div class = "flex w-1/2">
+            <div class="w-1/6">
+                <label class="input-label" asp-for="Name"></label>
+            </div>
+            <div class="w-4/6">
+                <input class="input-box" asp-for="Name" type="text"/>
+                </select>
+            </div>
+        </div>
+    </div>
 </div>

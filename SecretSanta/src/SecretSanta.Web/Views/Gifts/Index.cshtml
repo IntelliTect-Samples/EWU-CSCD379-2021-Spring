@@ -2,10 +2,16 @@
 
 @{int counter = 0;}
 
-@foreach(var groupViewModel in Model) {
-    <section>
-        @groupViewModel.Title <a asp-action="Edit" asp-route-id=@counter>Edit</a><form asp-action="Delete" asp-route-id=@counter method="post"><button>X</button></form>
-        @{counter++;}
-    </section>
-}
-<a asp-action="Create">Create</a>
+<section class="flex flex-wrap justify-between">
+    @foreach(var gift in Model) {
+        <div class="w-full sm:w-1/2 lg:w-1/3">
+            <section class="item">
+                <div class="item-title"> @gift.Title </div> <a asp-controller="Gifts" asp-action="Edit" class="edit-btn" asp-route-id=@counter>Edit</a>
+                <form class="inline-block float-right" asp-controller="Gifts" asp-action="Delete" asp-route-id=@counter method="post"><button class="delete-btn" onclick="return confirm('You are about to delete @gift.Title. Are you sure you want to do this?')"><i class="fas fa-trash"></i></button></form>
+                @{counter++;}
+            </section>
+        </div>
+    }
+</section>
+
+<a class="index-btn" asp-controller="Gifts" asp-action="Create">Create</a>

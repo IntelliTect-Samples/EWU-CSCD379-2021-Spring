@@ -1,0 +1,56 @@
+  
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn {
+        @apply border border-blue-800;
+        @apply rounded-xl py-2 px-4 bg-blue-200 ml-2 hover:bg-indigo-500;
+        @apply mt-4;
+    }
+    .input-label {
+        @apply text-gray-500 font-bold text-right;
+        @apply ml-2;
+    }
+    .input-box {
+        @apply focus:outline-none focus:ring-transparent focus:border-indigo-600;
+        @apply border border-indigo-300 rounded-md w-full;
+        @apply mx-10  px-3;
+    }
+    .field {
+        @apply flex w-full my-2 sm:w-1/2;
+    }
+    .item {
+        @apply border-gray-500 border-2 p-7 m-5 rounded-lg bg-green-200;
+    }
+    .item-title {
+        @apply text-center text-lg inline-block;
+    }
+    .index-btn {
+        @apply border border-blue-800;
+        @apply rounded-xl py-2 px-4 bg-blue-200 ml-2 hover:bg-indigo-500;
+        @apply mt-10 mx-5 ;
+    }
+    .edit-btn {
+        @apply border border-green-800;
+        @apply bg-green-400;
+        @apply rounded-xl py-2 px-4 ml-2 hover:bg-indigo-500;
+        @apply float-right;        
+        @apply inline-block;
+    }
+    .delete-btn {
+        @apply border border-red-800;
+        @apply bg-red-400;
+        @apply p-0 m-0;
+        @apply rounded-xl py-2 px-4 ml-2 hover:bg-indigo-500;
+        @apply float-right;
+        @apply inline-block;
+    }
+}
+
+@layer utilities {
+    .input-validation-error {
+        @apply border-red-400 focus:border-red-800;
+    }
+}

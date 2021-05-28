@@ -2,6 +2,6 @@
 
 <form asp-controller="Users" asp-action="Create" method="post">
     @await Html.PartialAsync("_CreateOrEdit")
-    <button>Create</button>
-    <a asp-controller="Users" asp-action="Index">Cancel</a>
+    <button class="btn">Create</button>
+    <a class="btn" asp-controller="Users" asp-action="Index">Cancel</a>
 </form>
