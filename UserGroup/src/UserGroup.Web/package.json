@@ -2,12 +2,18 @@
   "name": "usergroup.web",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "14",
+    "npm": "6"
+  },
   "scripts": {
-    "build:prod": "run-script-os",
+    "prebuild": "check-node-version --package",
+    "build:prod": "cross-env NODE_ENV=production & webpack --mode production",
+    "build:prodOS": "run-script-os",
     "build:dev": "webpack --mode development --watch",
-    "build:prod:linux": "export NODE_ENV=production && webpack --mode production",
-    "build:prod:win32": "SET \"NODE_ENV=production\" & webpack --mode production",
-    "build:prod:darwin": "export NODE_ENV=production && webpack --mode production"
+    "build:prodOS:linux": "export NODE_ENV=production && webpack --mode production",
+    "build:prodOS:win32": "SET \"NODE_ENV=production\" & webpack --mode production",
+    "build:prodOS:darwin": "export NODE_ENV=production && webpack --mode production"
   },
   "author": "",
   "license": "ISC",
@@ -22,8 +28,10 @@
     "@fortawesome/free-regular-svg-icons": "5.15.3",
     "@fortawesome/free-solid-svg-icons": "5.15.3",
     "autoprefixer": "10.2.5",
+    "check-node-version": "4.1.0",
     "clean-webpack-plugin": "3.0.0",
     "copy-webpack-plugin": "8.1.1",
+    "cross-env": "^7.0.3",
     "css-loader": "5.2.1",
     "expose-loader": "2.0.0",
     "fibers": "5.0.0",
