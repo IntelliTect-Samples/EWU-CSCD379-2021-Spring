@@ -9,6 +9,7 @@
   "scripts": {
     "prebuild": "check-node-version --package",
     "build:prod": "cross-env NODE_ENV=production & webpack --mode production",
+    "__comment": "The alternative to using cross-env is to use run-script-os for OS specific scripts (see below)",
     "build:prodOS": "run-script-os",
     "build:dev": "webpack --mode development --watch",
     "build:prodOS:linux": "export NODE_ENV=production && webpack --mode production",
