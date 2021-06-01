@@ -283,7 +283,7 @@ __pycache__/
 *.db
 
 # Visual Studio code
-.vscode/
+# .vscode/
 
 # Ignore Mac DS_Store files
 .DS_Store
