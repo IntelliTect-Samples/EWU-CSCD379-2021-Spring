@@ -1,0 +1,61 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Deployment
+
+on:
+  push:
+    branches: [ Assignment* ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: ./SecretSanta/
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.x'
+
+    - name: npm install
+      working-directory: ./SecretSanta/src/SecretSanta.Web/
+      run: npm install
+    
+    - name: npm build
+      working-directory: ./SecretSanta/src/SecretSanta.Web/
+      run: npm run build:prod
+
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore --configuration Release
+
+    - name: dotnet publish (API)
+      working-directory: ./SecretSanta/src/SecretSanta.Api/
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/api
+
+    - name: dotnet publish (WEB)
+      working-directory: ./SecretSanta/src/SecretSanta.Web/
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/web
+       
+    - name: Deploy API App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'cscd379-secret-santa-mia-api'
+        slot-name: Production
+        publish-profile: ${{ secrets.AZURE_SECRET_SANTA_API_PUBLISHPROFILE }}
+        package: ${{env.DOTNET_ROOT}}/api
+    
+    - name: Deploy Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'cscd379-secret-santa-mia'
+        slot-name: Production
+        publish-profile: ${{ secrets.AZURE_SECRET_SANTA_WEB_PUBLISHPROFILE }}
+        package: ${{env.DOTNET_ROOT}}/web

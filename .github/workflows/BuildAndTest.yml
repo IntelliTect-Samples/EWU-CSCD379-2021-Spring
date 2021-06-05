@@ -1,4 +1,4 @@
-name: Assignment Build And Test
+name: Build And Test
 
 on:
   push:
@@ -31,10 +31,18 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       
-    - name: Build
+    - name: Build Web
       run: dotnet build --no-restore
 
-    - name: Test
+    - name: Test Web
+      run: dotnet test --no-build --verbosity normal
+      
+    - name: Build Api
+      working-directory: ./SecretSanta/src/SecretSanta.Api/
+      run: dotnet build --no-restore
+      
+    - name: Test Api
+      working-directory: ./SecretSanta/src/SecretSanta.Api/
       run: dotnet test --no-build --verbosity normal
       
     - name: Verify Build Badge
