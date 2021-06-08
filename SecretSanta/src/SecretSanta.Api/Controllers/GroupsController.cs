@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using SecretSanta.Business;
@@ -27,19 +28,29 @@ namespace SecretSanta.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Dto.Group?> Get(int id)
+        public async Task<ActionResult<Dto.Group?>> Get(int id)
         {
-            Dto.Group? group = Dto.Group.ToDto(GroupRepository.GetItem(id), true);
+            Dto.Group? group = Dto.Group.ToDto(await GroupRepository.GetItem(id), true);
             if (group is null) return NotFound();
+            foreach(Dto.User user in 
+                (await GroupRepository.GetUsers(id)).Select(item => Dto.User.ToDto(item)!))
+            {
+                group.Users.Add(user);
+            }
+            foreach(Dto.Assignment assignment in 
+                GroupRepository.GetAssignments(id).Select(item => Dto.Assignment.ToDto(item)!))
+            {
+                group.Assignments.Add(assignment);
+            }
             return group;
         }
 
         [HttpDelete("{id}")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            if (GroupRepository.Remove(id))
+            if (await GroupRepository.Remove(id))
             {
                 return Ok();
             }
@@ -49,23 +60,23 @@ namespace SecretSanta.Api.Controllers
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(Dto.Group), (int)HttpStatusCode.OK)]
-        public ActionResult<Dto.Group?> Post([FromBody] Dto.Group group)
+        public async Task<ActionResult<Dto.Group?>> Post([FromBody] Dto.Group group)
         {
-            return Dto.Group.ToDto(GroupRepository.Create(Dto.Group.FromDto(group)!));
+            return Dto.Group.ToDto(await GroupRepository.Create(Dto.Group.FromDto(group)!));
         }
 
         [HttpPut("{id}")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public ActionResult Put(int id, [FromBody] Dto.UpdateGroup? group)
+        public async Task<ActionResult> Put(int id, [FromBody] Dto.UpdateGroup? group)
         {
-            Data.Group? foundGroup = GroupRepository.GetItem(id);
+            Data.Group? foundGroup = await GroupRepository.GetItem(id);
             if (foundGroup is not null)
             {
                 foundGroup.Name = group?.Name ?? "";
 
-                GroupRepository.Save(foundGroup);
+                await GroupRepository.Save(foundGroup);
                 return Ok();
             }
             return NotFound();
@@ -75,16 +86,10 @@ namespace SecretSanta.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public ActionResult Remove(int id, [FromBody] int userId)
+        public async Task<ActionResult> Remove(int id, [FromBody] int userId)
         {
-            Data.Group? foundGroup = GroupRepository.GetItem(id);
-            if (foundGroup is not null)
+            if(await GroupRepository.RemoveUser(id, userId))
             {
-                if (foundGroup.Users.FirstOrDefault(x => x.Id == userId) is { } user)
-                {
-                    foundGroup.Users.Remove(user);
-                    GroupRepository.Save(foundGroup);
-                }
                 return Ok();
             }
             return NotFound();
@@ -94,17 +99,9 @@ namespace SecretSanta.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public ActionResult Add(int id, [FromBody] int userId)
+        public async Task<ActionResult> Add(int id, [FromBody] int userId)
         {
-            Data.Group? foundGroup = GroupRepository.GetItem(id);
-            Data.User? foundUser = UserRepository.GetItem(userId);
-            if (foundGroup is not null && foundUser is not null)
-            {
-                if (!foundGroup.Users.Any(x => x.Id == foundUser.Id))
-                {
-                    foundGroup.Users.Add(foundUser);
-                    GroupRepository.Save(foundGroup);
-                }
+            if(await GroupRepository.AddUser(id, userId)){
                 return Ok();
             }
             return NotFound();
@@ -113,9 +110,9 @@ namespace SecretSanta.Api.Controllers
         [HttpPut("{id}/assign")]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        public ActionResult CreateAssignments(int id)
+        public async Task<ActionResult> CreateAssignments(int id)
         {
-            AssignmentResult result = GroupRepository.GenerateAssignments(id);
+            AssignmentResult result = await GroupRepository.GenerateAssignments(id);
             if (!result.IsSuccess)
             {
                 return BadRequest(result.ErrorMessage);

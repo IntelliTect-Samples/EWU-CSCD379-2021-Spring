@@ -24,12 +24,12 @@ namespace SecretSanta.Business.Tests
             UserRepository sut = new();
             User user = new()
             {
-                Id = 42
+                UserId = 42
             };
 
             User createdUser = sut.Create(user);
 
-            User? retrievedUser = sut.GetItem(createdUser.Id);
+            User? retrievedUser = sut.GetItem(createdUser.UserId);
             Assert.AreEqual(user, retrievedUser);
         }
 
@@ -49,14 +49,14 @@ namespace SecretSanta.Business.Tests
             UserRepository sut = new();
             sut.Create(new() 
             { 
-                Id = 42,
+                UserId = 42,
                 FirstName = "First",
                 LastName = "Last"
             });
 
             User? user = sut.GetItem(42);
 
-            Assert.AreEqual(42, user?.Id);
+            Assert.AreEqual(42, user?.UserId);
             Assert.AreEqual("First", user!.FirstName);
             Assert.AreEqual("Last", user.LastName);
         }
@@ -67,7 +67,7 @@ namespace SecretSanta.Business.Tests
             UserRepository sut = new();
             sut.Create(new()
             {
-                Id = 42,
+                UserId = 42,
                 FirstName = "First",
                 LastName = "Last"
             });
@@ -89,7 +89,7 @@ namespace SecretSanta.Business.Tests
             UserRepository sut = new();
             sut.Create(new()
             {
-                Id = 42,
+                UserId = 42,
                 FirstName = "First",
                 LastName = "Last"
             });
@@ -111,9 +111,9 @@ namespace SecretSanta.Business.Tests
         {
             UserRepository sut = new();
 
-            sut.Save(new User() { Id = 42 });
+            sut.Save(new User() { UserId = 42 });
 
-            Assert.AreEqual(42, sut.GetItem(42)?.Id);
+            Assert.AreEqual(42, sut.GetItem(42)?.UserId);
         }
     }
 }

@@ -4,13 +4,9 @@ namespace SecretSanta.Data
 {
     public class Assignment
     {
-        public User Giver { get; }
-        public User Receiver { get; }
-
-        public Assignment(User giver, User recipient)
-        {
-            Giver = giver ?? throw new ArgumentNullException(nameof(giver));
-            Receiver = recipient ?? throw new ArgumentNullException(nameof(recipient));
-        }
+        public int AssignmentId {get; set;}
+        public int GroupId { get; set;}
+        public User Giver { get; set;}
+        public User Receiver { get; set;}
     }
 }

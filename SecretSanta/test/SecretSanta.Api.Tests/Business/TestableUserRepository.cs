@@ -10,7 +10,7 @@ namespace SecretSanta.Api.Tests.Business
 
         public User Create(User item)
         {
-            Users.Add(item.Id, item);
+            Users.Add(item.UserId, item);
             return item;
         }
 
@@ -24,6 +24,6 @@ namespace SecretSanta.Api.Tests.Business
 
         public bool Remove(int id) => Users.Remove(id);
 
-        public void Save(User item) => Users[item.Id] = item;
+        public void Save(User item) => Users[item.UserId] = item;
     }
 }

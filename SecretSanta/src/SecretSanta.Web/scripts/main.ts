@@ -8,7 +8,7 @@ import { fas, faThList } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 
-import { Group, GroupsClient, User, UsersClient } from '../Api/SecretSanta.Api.Client.g';
+import { Gift, Group, GroupsClient, User, UsersClient, GiftsClient } from '../Api/SecretSanta.Api.Client.g';
 
 library.add(fas, far, fab);
 dom.watch();
@@ -50,7 +50,11 @@ export function setupUsers() {
             } catch (error) {
                 console.log(error);
             }
+        },
+        async getAssignments(currentUser: User) {
+            return currentUser.assignmentList;
         }
+
     }
 }
 
@@ -84,6 +88,50 @@ export function createOrUpdateUser() {
             } catch (error) {
                 console.log(error);
             }
+        },
+        async listGifts(){
+            try {
+                window.location.href='/gifts/index/'+`${this.user.id}`;
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+}
+
+export function setupGifts() {
+    return {
+        user: {} as User,
+        gifts: [] as Gift[],
+        async loadData() {
+            const pathnameSplit = window.location.pathname.split('/');
+            const id = pathnameSplit[pathnameSplit.length - 1];
+            try {
+                const client = new GiftsClient(apiHost);
+                this.gifts = await client.get(+id);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+}
+
+export function createOrUpdateGift(){
+    return {
+        gift: {} as Gift,
+        async create() {
+            try {
+                const client = new GiftsClient(apiHost);
+                await client.post(this.gift);
+                window.location.href='/gift/index' + `${this.gift.userId}`;
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async loadUser(){
+            const pathnameSplit = window.location.pathname.split('/');
+            const id = pathnameSplit[pathnameSplit.length - 2];
+            this.gift.userId = +id;
         }
     }
 }

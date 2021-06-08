@@ -11,7 +11,7 @@ namespace SecretSanta.Api.Tests.Business
 
         public Group Create(Group item)
         {
-            Groups.Add(item.Id, item);
+            Groups.Add(item.GroupId, item);
             return item;
         }
 
@@ -31,6 +31,6 @@ namespace SecretSanta.Api.Tests.Business
 
         public bool Remove(int id) => Groups.Remove(id);
 
-        public void Save(Group item) => Groups[item.Id] = item;
+        public void Save(Group item) => Groups[item.GroupId] = item;
     }
 }

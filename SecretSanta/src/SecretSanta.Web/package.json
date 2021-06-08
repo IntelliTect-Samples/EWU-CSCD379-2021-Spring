@@ -2,9 +2,14 @@
   "name": "secretsanta.web",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "14",
+    "npm": "6"
+  },
   "scripts": {
-    "build:prod": "run-script-os",
-    "build:dev": "webpack --mode development --watch",
+    "build:prod": "cross-env NODE_ENV=production & webpack --mode production",
+    "build:prodOS": "run-script-os",
+    "build:dev": "check-node-version --package & webpack --mode development --watch",
     "build:prod:linux": "export NODE_ENV=production && webpack --mode production",
     "build:prod:win32": "SET \"NODE_ENV=production\" & webpack --mode production",
     "build:prod:darwin": "export NODE_ENV=production && webpack --mode production"

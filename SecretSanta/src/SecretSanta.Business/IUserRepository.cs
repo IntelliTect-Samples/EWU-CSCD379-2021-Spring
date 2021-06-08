@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using SecretSanta.Data;
 
 namespace SecretSanta.Business
@@ -6,10 +7,12 @@ namespace SecretSanta.Business
     public interface IUserRepository
     {
         ICollection<User> List();
-        User? GetItem(int id);
-        bool Remove(int id);
-        User Create(User item);
-        void Save(User item);
+        Task<User?> GetItem(int id);
+        Task<bool> Remove(int id);
+        Task<User> Create(User item);
+        Task<List<User>> GetAssignmentUsers(int id);
+        List<Gift> GetGifts(int id);
+        Task Save(User item);
     }
 
 }

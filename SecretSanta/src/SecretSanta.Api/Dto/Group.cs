@@ -15,7 +15,7 @@ namespace SecretSanta.Api.Dto
             if (group is null) return null;
             var rv = new Group
             {
-                Id = group.Id,
+                Id = group.GroupId,
                 Name = group.Name
             };
             if (includeChildObjects)
@@ -43,7 +43,7 @@ namespace SecretSanta.Api.Dto
             if (group is null) return null;
             return new Data.Group
             {
-                Id = group.Id,
+                GroupId = group.Id,
                 Name = group.Name ?? "",
             };
         }

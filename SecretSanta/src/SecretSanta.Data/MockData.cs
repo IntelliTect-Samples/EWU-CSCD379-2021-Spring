@@ -26,7 +26,7 @@ namespace SecretSanta.Data
                 1,
                 new User
                 {
-                    Id = 1,
+                    UserId = 1,
                     FirstName = "Inigo",
                     LastName = "Montoya"
                 }
@@ -35,7 +35,7 @@ namespace SecretSanta.Data
                 2,
                 new User
                 {
-                    Id = 2,
+                    UserId = 2,
                     FirstName = "Princess",
                     LastName = "Buttercup"
                 }
@@ -44,7 +44,7 @@ namespace SecretSanta.Data
                 3,
                 new User
                 {
-                    Id = 3,
+                    UserId = 3,
                     FirstName = "Prince",
                     LastName = "Humperdink"
                 }
@@ -53,7 +53,7 @@ namespace SecretSanta.Data
                 4,
                 new User
                 {
-                    Id = 4,
+                    UserId = 4,
                     FirstName = "Count",
                     LastName = "Rugen"
                 }
@@ -62,7 +62,7 @@ namespace SecretSanta.Data
                 5,
                 new User
                 {
-                    Id = 5,
+                    UserId = 5,
                     FirstName = "Miracle",
                     LastName = "Max"
                 }
@@ -75,7 +75,7 @@ namespace SecretSanta.Data
                 1,
                 new Group
                 {
-                    Id = 1,
+                    GroupId = 1,
                     Name = "IntelliTect Christmas Party"
                 }
             },
@@ -83,7 +83,7 @@ namespace SecretSanta.Data
                 2,
                 new Group
                 {
-                    Id = 2,
+                    GroupId = 2,
                     Name = "Friends"
                 }
             }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SecretSanta.Business;
 
@@ -20,13 +21,25 @@ namespace SecretSanta.Api.Controllers
         [HttpGet]
         public IEnumerable<Dto.User> Get()
         {
+
             return Repository.List().Select(x => Dto.User.ToDto(x)!);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Dto.User?> Get(int id)
+        public async Task<ActionResult<Dto.User?>> Get(int id)
         {
-            Dto.User? user = Dto.User.ToDto(Repository.GetItem(id));
+            List<Dto.User>? userAssignments = new();
+            foreach(SecretSanta.Data.User fullUser in 
+                (await Repository.GetAssignmentUsers(id)))
+            {
+                userAssignments.Add(Dto.User.ToDto(fullUser));
+            }
+            List<Dto.Gift>? gifts = new();
+            foreach(SecretSanta.Data.Gift gift in Repository.GetGifts(id))
+            {
+                gifts.Add(Dto.Gift.ToDto(gift));
+            }
+            Dto.User? user = Dto.User.ToDto(await Repository.GetItem(id), userAssignments, gifts);
             if (user is null) return NotFound();
             return user;
         }
@@ -34,9 +47,9 @@ namespace SecretSanta.Api.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            if (Repository.Remove(id))
+            if (await Repository.Remove(id))
             {
                 return Ok();
             }
@@ -46,24 +59,24 @@ namespace SecretSanta.Api.Controllers
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(Dto.User), (int)HttpStatusCode.OK)]
-        public ActionResult<Dto.User?> Post([FromBody] Dto.User user)
+        public async Task<ActionResult<Dto.User?>> Post([FromBody] Dto.User user)
         {
-            return Dto.User.ToDto(Repository.Create(Dto.User.FromDto(user)!));
+            return Dto.User.ToDto(await Repository.Create(Dto.User.FromDto(user)!));
         }
 
         [HttpPut("{id}")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public ActionResult Put(int id, [FromBody] Dto.UpdateUser? user)
+        public async Task<ActionResult> Put(int id, [FromBody] Dto.UpdateUser? user)
         {
-            Data.User? foundUser = Repository.GetItem(id);
+            Data.User? foundUser = await Repository.GetItem(id);
             if (foundUser is not null)
             {
                 foundUser.FirstName = user?.FirstName ?? "";
                 foundUser.LastName = user?.LastName ?? "";
 
-                Repository.Save(foundUser);
+                await Repository.Save(foundUser);
                 return Ok();
             }
             return NotFound();

@@ -24,12 +24,12 @@ namespace SecretSanta.Business.Tests
             GroupRepository sut = new();
             Group user = new()
             {
-                Id = 42
+                GroupId = 42
             };
 
             Group createdGroup = sut.Create(user);
 
-            Group? retrievedGroup = sut.GetItem(createdGroup.Id);
+            Group? retrievedGroup = sut.GetItem(createdGroup.GroupId);
             Assert.AreEqual(user, retrievedGroup);
         }
 
@@ -49,13 +49,13 @@ namespace SecretSanta.Business.Tests
             GroupRepository sut = new();
             sut.Create(new() 
             { 
-                Id = 42,
+                GroupId = 42,
                 Name = "Group",
             });
 
             Group? user = sut.GetItem(42);
 
-            Assert.AreEqual(42, user?.Id);
+            Assert.AreEqual(42, user?.GroupId);
             Assert.AreEqual("Group", user!.Name);
         }
 
@@ -65,7 +65,7 @@ namespace SecretSanta.Business.Tests
             GroupRepository sut = new();
             sut.Create(new()
             {
-                Id = 42,
+                GroupId = 42,
                 Name = "Group",
             });
 
@@ -86,7 +86,7 @@ namespace SecretSanta.Business.Tests
             GroupRepository sut = new();
             sut.Create(new()
             {
-                Id = 42,
+                GroupId = 42,
                 Name = "Group"
             });
 
@@ -107,9 +107,9 @@ namespace SecretSanta.Business.Tests
         {
             GroupRepository sut = new();
 
-            sut.Save(new Group() { Id = 42 });
+            sut.Save(new Group() { GroupId = 42 });
 
-            Assert.AreEqual(42, sut.GetItem(42)?.Id);
+            Assert.AreEqual(42, sut.GetItem(42)?.GroupId);
         }
 
         [TestMethod]
@@ -128,7 +128,7 @@ namespace SecretSanta.Business.Tests
             GroupRepository sut = new();
             sut.Create(new()
             {
-                Id = 42,
+                GroupId = 42,
                 Name = "Group"
             });
 
@@ -143,7 +143,7 @@ namespace SecretSanta.Business.Tests
             GroupRepository sut = new();
             Group group = sut.Create(new()
             {
-                Id = 42,
+                GroupId = 42,
                 Name = "Group"
             });
             group.Users.Add(new User { FirstName = "John", LastName = "Doe" });

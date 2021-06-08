@@ -29,7 +29,7 @@ namespace SecretSanta.Api.Tests.Controllers
             TestableUserRepository repository = factory.UserRepository;
             Data.User user = new()
             {
-                Id = 42,
+                UserId = 42,
                 FirstName = "John",
                 LastName = "Smith"
             };
@@ -55,7 +55,7 @@ namespace SecretSanta.Api.Tests.Controllers
             TestableUserRepository repository = factory.UserRepository;
             Data.User user = new()
             {
-                Id = 42,
+                UserId = 42,
                 FirstName = "John",
                 LastName = "Smith"
             };
@@ -80,7 +80,7 @@ namespace SecretSanta.Api.Tests.Controllers
             TestableUserRepository repository = factory.UserRepository;
             Data.User user = new()
             {
-                Id = 42,
+                UserId = 42,
                 FirstName = "John",
                 LastName = "Smith"
             };
@@ -103,7 +103,7 @@ namespace SecretSanta.Api.Tests.Controllers
             TestableUserRepository repository = factory.UserRepository;
             Data.User user = new()
             {
-                Id = 42,
+                UserId = 42,
                 FirstName = "John",
                 LastName = "Smith"
             };
@@ -127,7 +127,7 @@ namespace SecretSanta.Api.Tests.Controllers
             TestableUserRepository repository = factory.UserRepository;
             Data.User user = new()
             {
-                Id = 42,
+                UserId = 42,
                 FirstName = "John",
                 LastName = "Smith"
             };
@@ -163,7 +163,7 @@ namespace SecretSanta.Api.Tests.Controllers
             //Assert
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             var createdUser = repository.GetItem(42);
-            Assert.AreEqual(42, createdUser.Id);
+            Assert.AreEqual(42, createdUser.UserId);
             Assert.AreEqual("John", createdUser.FirstName);
             Assert.AreEqual("Smith", createdUser.LastName);
         }
@@ -176,7 +176,7 @@ namespace SecretSanta.Api.Tests.Controllers
             TestableUserRepository repository = factory.UserRepository;
             Data.User user = new()
             {
-                Id = 42,
+                UserId = 42,
                 FirstName = "John",
                 LastName = "Smith"
             };
@@ -193,7 +193,7 @@ namespace SecretSanta.Api.Tests.Controllers
             //Assert
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             var createdUser = repository.GetItem(42);
-            Assert.AreEqual(42, createdUser.Id);
+            Assert.AreEqual(42, createdUser.UserId);
             Assert.AreEqual("Jane", createdUser.FirstName);
             Assert.AreEqual("Doe", createdUser.LastName);
         }
@@ -206,7 +206,7 @@ namespace SecretSanta.Api.Tests.Controllers
             TestableUserRepository repository = factory.UserRepository;
             Data.User user = new()
             {
-                Id = 42,
+                UserId = 42,
                 FirstName = "John",
                 LastName = "Smith"
             };
@@ -223,7 +223,7 @@ namespace SecretSanta.Api.Tests.Controllers
             //Assert
             Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
             var createdUser = repository.GetItem(42);
-            Assert.AreEqual(42, createdUser.Id);
+            Assert.AreEqual(42, createdUser.UserId);
             Assert.AreEqual("John", createdUser.FirstName);
             Assert.AreEqual("Smith", createdUser.LastName);
         }
